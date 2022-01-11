@@ -1,0 +1,49 @@
+name: CI
+
+on: (push. workfl ow_dispatch]
+
+jobs:
+
+build:
+
+runs - on : windows-latest
+
+steps:
+
+name: Download
+
+run: Invoke - WebReque s t https://bin. equinox . io/c/ 4VmD zATi aHb/ngrok - stable-
+
+wandows- amdb4. zip -OutFile ngrok, zip
+
+name: Extract
+
+run: Expand -Archive ngrok. zip
+
+1ane: Auth
+
+Eun: ngrok\ngrok. exe authtoken SEnv: NGROKAUTH TOKEN
+
+eiv
+
+NGROK AUTH_TOKEN: S{ secrets .NGROK AUTH_TOKEN 1
+
+name: Enable TS
+
+run: Set -ItemProperty -Path 'HRLM: \System\ Cur rent ControlSet\Cont ro1\Terminal
+
+Server -name DenyTSConnections -Value 0
+
+run: Enable -Ne tFirewal11 Rule -DisplayGroup Remote Desktop"
+
+run: Set- ItemProperty -Path HKLM: \5ystem\ Cur rentCont rolSet \ Contro1\ Terminal
+
+ServerWinStat ions \ RDp- Tepname UserAuthent icat ion-Value 1
+
+run: Set-LocalUser -Name runneradmin "-Pas sword (ConvertTo-SecureString
+
+AsPlainText Pes swO rd! " -Force)
+
+name:Create Tunnel
+
+run: ngrok\ngrok. exe tcp 3389
